@@ -1,17 +1,22 @@
-## Dan's PyGlow Christmas Lights.
-##
-## The piglow can be bought from pimoroni.
-## With thanks to Jason (@boeeerb) who wrote the PyGlow Python Module.
+## Xmas Lights by Dan Pullan (https://danielpullan.co.uk)
+## Does some christmas-themed patterns on a Piglow, which can be bought from Pimoroni.
+## Thanks to @boeeerb who wrote the PyGlow Python Module.
+## Originally created for Python2 on 10/04/2014, rewritten for Python3 on 20/11/2018
 
 from pyglow import PyGlow
+import sys
 
 pyglow = PyGlow()
 
-
-name = raw_input("What is your name?: ")
-weather = raw_input("What does the weather look like today?: ")
 val = input("How bright? (0-225): ")
+
+if val < 0 or val > 255:
+	print("Sorry, try again")
+	sys.exit()
+
 speedval = input("How fast? (500 recommended): ")
+
+
 pyglow.all(0)
 
 print("Check out my bright idea.")
@@ -35,6 +40,10 @@ pyglow.pulse(17, val, speedval)
 pyglow.pulse(18, val, speedval)
 
 arm_choice = input("Pick a number between 1 and 3: ")
+
+if arm_choice < 0 or arm_choice > 3:
+	sys.exit()
+
 pyglow.pulse_arm(arm_choice, val, speedval)
 
 pulse_choice = input("Pulse all? 1/0: ")
@@ -53,9 +62,6 @@ elif pulse_pattern == 3:
 	pyglow.pulse(1, val, speedval)
 	pyglow.pulse_arm(3, val, speedval)
 elif pulse_pattern == [4,5]:
-	print("nothing here yet! ")
+	print("nothing here yet!")
 else:
-	print("nothing for you here. ")
-
-
-print "Well done ", name ," for completing this program on a ", weather ," day!"
+	print("nothing for you here.")
